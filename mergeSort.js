@@ -188,20 +188,21 @@ function findMiddle(list){
 }
 
 function mergeList(list){
-  if(list.next === null || list === null){
+  if(list === null || list.next === null){
     return list;
   }
 
   // const middle = findMiddle(list);
-  const left = list.head;
+  const left = list;
   const leftMiddle = findMiddle(left);
   const right = leftMiddle.next;
   leftMiddle.next = null;
-
+ 
   const first = mergeList(left);
   const second = mergeList(right);
 
-  return sortLl(first, second);
+  const sorted = sortLl(first, second);
+  return sorted;
 }
 
 function sortLl(first, second) {
@@ -224,7 +225,7 @@ function sortLl(first, second) {
   return result;
 }
 
-console.log(mergeList(ll));
+console.log(mergeList(ll.head));
 
 // 1,2,3,3,4,6,8,9
 // slow = 1; slow++;
