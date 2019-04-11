@@ -9,6 +9,7 @@ function quickSort(array, start = 0, end = array.length) {
     return array;
   }
   const middle = partition(array, start, end);
+  console.log(middle);
   console.log(array);
   array = quickSort(array, start, middle);
   array = quickSort(array, middle + 1, end);
