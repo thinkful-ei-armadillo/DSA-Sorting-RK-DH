@@ -1,3 +1,5 @@
+'use strict';
+
 function swap(array, i, j) {
   const tmp = array[i];
   array[i] = array[j];
@@ -9,8 +11,7 @@ function quickSort(array, start = 0, end = array.length) {
     return array;
   }
   const middle = partition(array, start, end);
-  console.log(middle);
-  console.log(array);
+
   array = quickSort(array, start, middle);
   array = quickSort(array, middle + 1, end);
   return array;
@@ -26,7 +27,6 @@ function partition(array, start, end) {// starts to move everything bigger than 
       swap(array, i, j);
       j++;
     }
-
   }
   swap(array, end-1, j);
   return j;
@@ -47,3 +47,69 @@ function bubbleSort(array) {
   }
   return array;
 }
+
+
+function qSort(array, start = 0, end = array.length){
+  if(start >= end){
+    return array;
+  }
+  const middle = partitionFront(array, start, end);
+  qSort(array, start, middle - 1);
+  qSort(array, middle + 1, end);
+  return array;
+}
+
+function partitionFront(array, start, end) {
+  const pivot = array[start];
+  let j = start + 1;
+  for(let i = j; i < end -1; i++){
+    if(array[i] <= pivot){
+      swapFront(array, i, j);
+      j++;
+    }
+  }
+  swapFront(array, start, j);
+  return j;
+}
+
+function swapFront(array, i, j){
+  const temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
+}
+
+console.log(qSort([30, 25, 32, 89, 72, 70, 51, 42, 25]));
+
+
+/*
+middle = pF(arr, 0 , 9)
+pF [
+  pivot: 30;
+  j = 1;
+  i = 1;
+
+  hit 25, j++
+
+  when we hit second 25: 
+  j = 2
+  i=8
+
+  [30, 25, 25, 32, 89, 72, 70, 51, 42, 32]
+
+  array after pF call:
+  [25, 25, 30, 32, 89, 72, 70, 51, 42, 32]
+  j = 2;
+  pF returns 2;
+
+  second qSort: qsort(array, 0, 1);
+    [25, 25, 30, 32, 89, 72, 70, 51, 42, 32]
+  pF: 
+
+
+]
+
+
+
+
+
+*/
